@@ -7,11 +7,11 @@
 	- http://msdn.microsoft.com/en-us/library/azure/dd179471.aspx
 
 Background: 
-	Given a valid connection string
+	Given Tables has been initialized
 
 Scenario: Query Tables
 	When ListAsync() is called
-	Then the connection's list of tables is returned
+	Then a list of tables for the current connection is returned
 
 Scenario: Create Table
 	Given todo: write scenario

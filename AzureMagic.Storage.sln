@@ -10,7 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureMagic.Storage.Tables.Specifications", "Projects\AzureMagic.Storage.Tables.Specifications\AzureMagic.Storage.Tables.Specifications.csproj", "{E727D20D-7FF8-4359-8B89-9AEFF4F21069}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureMagic.Storage.TableStorage", "Projects\AzureMagic.Storage.TableStorage\AzureMagic.Storage.TableStorage.csproj", "{14AE9C2C-C53F-421B-8EDB-BE5BB6D5444D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureMagic.Storage.TableStorage.Specifications", "Projects\AzureMagic.Storage.TableStorage.Specifications\AzureMagic.Storage.TableStorage.Specifications.csproj", "{E727D20D-7FF8-4359-8B89-9AEFF4F21069}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +20,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14AE9C2C-C53F-421B-8EDB-BE5BB6D5444D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14AE9C2C-C53F-421B-8EDB-BE5BB6D5444D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14AE9C2C-C53F-421B-8EDB-BE5BB6D5444D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14AE9C2C-C53F-421B-8EDB-BE5BB6D5444D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E727D20D-7FF8-4359-8B89-9AEFF4F21069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E727D20D-7FF8-4359-8B89-9AEFF4F21069}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E727D20D-7FF8-4359-8B89-9AEFF4F21069}.Release|Any CPU.ActiveCfg = Release|Any CPU

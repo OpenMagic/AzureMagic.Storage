@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace AzureMagic.Storage.Tables.Specifications.Features.RestApi
+namespace AzureMagic.Storage.TableStorage.Specifications.Features.RestApi
 {
     using TechTalk.SpecFlow;
     
@@ -72,7 +72,7 @@ The REST API provides operations to enumerate the tables in a storage account, c
         {
 #line 9
 #line 10
- testRunner.Given("a valid connection string", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("Tables has been initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
         
@@ -98,7 +98,7 @@ this.FeatureBackground();
 #line 13
  testRunner.When("ListAsync() is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 14
- testRunner.Then("the connection\'s list of tables is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("a list of tables for the current connection is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

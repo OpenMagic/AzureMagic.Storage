@@ -16,11 +16,13 @@ Provide a library interact with Microsoft Azure Storage services. The library mu
 
 Minimum requirements for AzureMagic.Storage.Tables.RESTAPI are currently being developed.
  
-## AzureMagic.Storage.Tables
+## AzureMagic.Storage.TableStorage
 
-AzureMagic.Storage.Tables project provides support for [Microsoft's Azure Table Service](http://msdn.microsoft.com/en-us/library/azure/dd179423.aspx).
+AzureMagic.Storage.TableStorage project provides support for [Microsoft's Azure Table Service](http://msdn.microsoft.com/en-us/library/azure/dd179423.aspx).
 
-### AzureMagic.Storage.Tables.RestApi
+*NOTE: AzureMagic.Storage.TableStorage is this name instead of AzureMagic.Storage.Tables so Tables class name can be used.
+
+### AzureMagic.Storage.TableStorage.RestApi
 
 AzureMagic.Storage.Tables.RestApi namespace provides the thinest possible layer [Microsoft's Azure Table Service REST API](http://msdn.microsoft.com/en-us/library/azure/dd179423.aspx).  
 
