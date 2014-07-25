@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace AzureMagic.Storage.Tables.Specifications.Features.RESTAPI
+namespace AzureMagic.Storage.Tables.Specifications.Features.RestApi
 {
     using TechTalk.SpecFlow;
     
@@ -68,6 +68,14 @@ The REST API provides operations to enumerate the tables in a storage account, c
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 9
+#line 10
+ testRunner.Given("a valid connection string", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         public virtual void SetFixture(TablesFeature.FixtureData fixtureData)
         {
         }
@@ -83,10 +91,14 @@ The REST API provides operations to enumerate the tables in a storage account, c
         public virtual void QueryTables()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Query Tables", ((string[])(null)));
-#line 9
+#line 12
 this.ScenarioSetup(scenarioInfo);
-#line 10
- testRunner.Given("todo: write scenario", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 9
+this.FeatureBackground();
+#line 13
+ testRunner.When("ListAsync() is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 14
+ testRunner.Then("the connection\'s list of tables is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -97,9 +109,11 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void CreateTable()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create Table", ((string[])(null)));
-#line 12
+#line 16
 this.ScenarioSetup(scenarioInfo);
-#line 13
+#line 9
+this.FeatureBackground();
+#line 17
  testRunner.Given("todo: write scenario", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -111,9 +125,11 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DeleteTable()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete Table", ((string[])(null)));
-#line 15
+#line 19
 this.ScenarioSetup(scenarioInfo);
-#line 16
+#line 9
+this.FeatureBackground();
+#line 20
  testRunner.Given("todo: write scenario", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -127,9 +143,11 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Table ACL", new string[] {
                         "ignore",
                         "todo"});
-#line 19
+#line 23
 this.ScenarioSetup(scenarioInfo);
-#line 20
+#line 9
+this.FeatureBackground();
+#line 24
  testRunner.Given("todo: write scenario", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -143,9 +161,11 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Set Table ACL", new string[] {
                         "ignore",
                         "todo"});
-#line 23
+#line 27
 this.ScenarioSetup(scenarioInfo);
-#line 24
+#line 9
+this.FeatureBackground();
+#line 28
  testRunner.Given("todo: write scenario", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
