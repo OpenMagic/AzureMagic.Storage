@@ -1,3 +1,6 @@
 *.user
 *.suo
 _NCrunch_AzureMagic.Storage/
+[Bb]in/
+[Oo]bj/
+[Pp]ackages/
