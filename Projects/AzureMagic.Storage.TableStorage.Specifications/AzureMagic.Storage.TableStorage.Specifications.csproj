@@ -90,6 +90,9 @@
       <DependentUpon>Tables.feature</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Support\Extensions.cs" />
+    <Compile Include="Support\Steps\CommonSteps.cs" />
+    <Compile Include="Support\Contexts\Context.cs" />
     <Compile Include="Support\WindowAzureStorageEmulatorManager.cs" />
   </ItemGroup>
   <ItemGroup>

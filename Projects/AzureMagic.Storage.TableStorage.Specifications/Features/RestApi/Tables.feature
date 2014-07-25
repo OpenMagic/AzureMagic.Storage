@@ -30,7 +30,7 @@ Scenario: Set Table ACL
 Scenario: Constructor(connectionString: null)
 	Given connectionString is null
 	When Tables(connectionString) is called
-	Then ArgumentNullException is throw
+	Then ArgumentNullException is thrown
 
 Scenario: Constructor(connectionString: empty)
 	Given connectionString is empty
