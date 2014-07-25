@@ -6,9 +6,11 @@ namespace AzureMagic.Storage.TableStorage.RestApi
 {
     public class Tables
     {
+        private readonly string ConnectionString;
+
         public Tables(string connectionString)
         {
-            throw new System.NotImplementedException();
+            ConnectionString = connectionString;
         }
 
         public Task<IEnumerable<string>> ListAsync()
