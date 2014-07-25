@@ -171,6 +171,66 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
+        [Xunit.FactAttribute()]
+        [Xunit.TraitAttribute("FeatureTitle", "Tables")]
+        [Xunit.TraitAttribute("Description", "Constructor(connectionString: null)")]
+        public virtual void ConstructorConnectionStringNull()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor(connectionString: null)", ((string[])(null)));
+#line 30
+this.ScenarioSetup(scenarioInfo);
+#line 9
+this.FeatureBackground();
+#line 31
+ testRunner.Given("connectionString is null", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 32
+ testRunner.When("Tables(connectionString) is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 33
+ testRunner.Then("ArgumentNullException is throw", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.FactAttribute()]
+        [Xunit.TraitAttribute("FeatureTitle", "Tables")]
+        [Xunit.TraitAttribute("Description", "Constructor(connectionString: empty)")]
+        public virtual void ConstructorConnectionStringEmpty()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor(connectionString: empty)", ((string[])(null)));
+#line 35
+this.ScenarioSetup(scenarioInfo);
+#line 9
+this.FeatureBackground();
+#line 36
+ testRunner.Given("connectionString is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 37
+ testRunner.When("Tables(connectionString) is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 38
+ testRunner.Then("ArgumentException is thrown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.FactAttribute()]
+        [Xunit.TraitAttribute("FeatureTitle", "Tables")]
+        [Xunit.TraitAttribute("Description", "Constructor(connectionString: valid)")]
+        public virtual void ConstructorConnectionStringValid()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor(connectionString: valid)", ((string[])(null)));
+#line 40
+this.ScenarioSetup(scenarioInfo);
+#line 9
+this.FeatureBackground();
+#line 41
+ testRunner.Given("connectionString is valid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 42
+ testRunner.When("Tables(connectionString) is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 43
+ testRunner.Then("an instance is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable

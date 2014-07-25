@@ -27,3 +27,17 @@ Scenario: Get Table ACL
 Scenario: Set Table ACL
 	Given todo: write scenario
 
+Scenario: Constructor(connectionString: null)
+	Given connectionString is null
+	When Tables(connectionString) is called
+	Then ArgumentNullException is throw
+
+Scenario: Constructor(connectionString: empty)
+	Given connectionString is empty
+	When Tables(connectionString) is called
+	Then ArgumentException is thrown
+
+Scenario: Constructor(connectionString: valid)
+	Given connectionString is valid
+	When Tables(connectionString) is called
+	Then an instance is returned
