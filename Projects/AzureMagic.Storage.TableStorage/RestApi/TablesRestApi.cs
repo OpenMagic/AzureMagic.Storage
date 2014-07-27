@@ -14,7 +14,7 @@ namespace AzureMagic.Storage.TableStorage.RestApi
     {
         private readonly StorageAccount Account;
 
-        private enum KeyType
+        private enum AuthorizationScheme
         {
             SharedKeyLite,
             SharedKey
@@ -50,14 +50,14 @@ namespace AzureMagic.Storage.TableStorage.RestApi
             }
         }
 
-        private static string GetAuthorizationHeader(HttpRequestMessage request, string account, string storageKey, KeyType keyType = KeyType.SharedKeyLite)
+        private static string GetAuthorizationHeader(HttpRequestMessage request, string account, string storageKey, AuthorizationScheme authorizationScheme = AuthorizationScheme.SharedKey)
         {
             var sharedKey = Convert.FromBase64String(storageKey);
             var resource = GetResource(request);
-            var stringToSign = GetStringToSign(request, account, keyType, resource);
+            var stringToSign = GetStringToSign(request, account, authorizationScheme, resource);
             var hasher = new HMACSHA256(sharedKey);
             var signedSignature = Convert.ToBase64String(hasher.ComputeHash(Encoding.UTF8.GetBytes(stringToSign)));
-            var authorizationHeader = string.Format("{0} {1}:{2}", keyType, account, signedSignature);
+            var authorizationHeader = string.Format("{0} {1}:{2}", authorizationScheme, account, signedSignature);
 
             return authorizationHeader;
         }
@@ -68,33 +68,33 @@ namespace AzureMagic.Storage.TableStorage.RestApi
 
             if (resource.Contains("?"))
             {
-                resource = resource.Substring(0, resource.IndexOf("?", StringComparison.Ordinal));
+                throw new NotImplementedException(@"Commented line is correct but GetStringToSign needs the parameters. Refer to D:\Exclude-From-Backups\Code\OpenSource\azure-storage-net\Lib\Common\Core\Util\AuthenticationUtility.cs");
+                //resource = resource.Substring(0, resource.IndexOf("?", StringComparison.Ordinal));
             }
 
             return resource;
         }
 
-        private static string GetStringToSign(HttpRequestMessage request, string account, KeyType keyType, string resource)
+        private static string GetStringToSign(HttpRequestMessage request, string account, AuthorizationScheme authorizationScheme, string resource)
         {
             var headers = request.Headers;
 
-            switch (keyType)
+            switch (authorizationScheme)
             {
-                case KeyType.SharedKeyLite:
+                case AuthorizationScheme.SharedKeyLite:
                     return string.Format("{0}\n/{1}{2}", headers.Date.GetValueOrDefault().ToString("R"), account, resource);
 
-                case KeyType.SharedKey:
-                    //return string.Format("{0}\n{1}\n{2}\n{3}\n/{4}/{5}",
-                    //    request.Method,
-                    //    TryGetHeaderValue(headers, "Content-MD5", ""),
-                    //    TryGetHeaderValue(headers, "Content-Type", ""),
-                    //    headers.Date.GetValueOrDefault().ToString("R"),
-                    //    account,
-                    //    resource);
-                    throw new NotImplementedException();
+                case AuthorizationScheme.SharedKey:
+                    return string.Format("{0}\n{1}\n{2}\n{3}\n/{4}{5}",
+                        request.Method,
+                        TryGetHeaderValue(headers, "Content-MD5", ""),
+                        TryGetHeaderValue(headers, "Content-Type", ""),
+                        headers.Date.GetValueOrDefault().ToString("R"),
+                        account,
+                        resource);
 
                 default:
-                    throw new NotImplementedException(string.Format("KeyType.{0} has not been implemented.", keyType));
+                    throw new NotImplementedException(string.Format("KeyType.{0} has not been implemented.", authorizationScheme));
 
             }
         }
@@ -103,7 +103,9 @@ namespace AzureMagic.Storage.TableStorage.RestApi
         {
             IEnumerable<string> values;
 
-            return headers.TryGetValues(key, out values) ? values.Single() : defaultValue;
+            var value = headers.TryGetValues(key, out values) ? values.Single() : defaultValue;
+
+            return value;
         }
     }
 }
