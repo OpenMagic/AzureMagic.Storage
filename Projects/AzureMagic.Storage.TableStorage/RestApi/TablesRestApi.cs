@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Anotar.CommonLogging;
 
 namespace AzureMagic.Storage.TableStorage.RestApi
 {
@@ -23,39 +22,44 @@ namespace AzureMagic.Storage.TableStorage.RestApi
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = Account.TablesUri;
+               
+                var request = new HttpRequestMessage(HttpMethod.Get, new Uri(Account.TablesUri, "Tables"));
+                var headers = request.Headers;
 
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.ParseAdd("application/json;odata=fullmetadata");
+                headers.Accept.Clear();
+                headers.Accept.ParseAdd("application/json;odata=fullmetadata");
 
-                foreach (var mediaTypeWithQualityHeaderValue in client.DefaultRequestHeaders.Accept)
-                {
-                    LogTo.Debug(mediaTypeWithQualityHeaderValue.ToString());
-                }
-
-                client.DefaultRequestHeaders.Add("x-ms-date", now);
+                headers.Date = DateTime.Now;
 
                 // http://msdn.microsoft.com/en-us/library/azure/dd179405.aspx implies this value is optional.
                 // However when accept header is application/json then x-ms-version header is required.
-                client.DefaultRequestHeaders.Add("x-ms-version", "2013-08-15");
+                headers.Add("x-ms-version", "2013-08-15");
 
-                client.DefaultRequestHeaders.Add("Authorization", GetAuthorizationHeader(Account.Name, Account.Key, now, new Uri(Account.TablesUri, "Tables")));
+                headers.Add("Authorization", GetAuthorizationHeader(request, Account.Name, Account.Key));
 
-                return await client.GetAsync("Tables");
+                return await client.SendAsync(request);
             }
         }
 
-        private static string GetAuthorizationHeader(string account, string storageKey, string now, Uri uri)
+        private static string GetAuthorizationHeader(HttpRequestMessage request, string account, string storageKey)
         {
             var sharedKey = Convert.FromBase64String(storageKey);
-            var resource = uri.PathAndQuery;
+            var resource = request.RequestUri.PathAndQuery;
 
             if (resource.Contains("?"))
             {
                 resource = resource.Substring(0, resource.IndexOf("?", StringComparison.Ordinal));
             }
 
-            var stringToSign = string.Format("{0}\n/{1}{2}", now, account, resource);
+            var stringToSign = string.Format("{0}\n/{1}{2}", request.Headers.Date.Value.ToString("R"), account, resource);
+//            var stringToSign = string.Format("{0}\n{1}\n{2}\n{3}\n/{4}/{5}",
+//method,
+//    client.DefaultRequestHeaders["Content-MD5"],
+//    request.Headers["Content-Type"],
+//    request.Headers["x-ms-date"],
+//    account,
+//    resource);
+
             var hasher = new HMACSHA256(sharedKey);
             var signedSignature = Convert.ToBase64String(hasher.ComputeHash(Encoding.UTF8.GetBytes(stringToSign)));
             var authorizationHeader = string.Format("{0} {1}:{2}", "SharedKeyLite", account, signedSignature);
