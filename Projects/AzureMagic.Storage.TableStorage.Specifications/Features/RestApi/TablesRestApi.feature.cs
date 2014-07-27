@@ -18,15 +18,15 @@ namespace AzureMagic.Storage.TableStorage.Specifications.Features.RestApi
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class TablesFeature : Xunit.IUseFixture<TablesFeature.FixtureData>, System.IDisposable
+    public partial class TablesRestApiFeature : Xunit.IUseFixture<TablesRestApiFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "Tables.feature"
+#line 1 "TablesRestApi.feature"
 #line hidden
         
-        public TablesFeature()
+        public TablesRestApiFeature()
         {
             this.TestInitialize();
         }
@@ -34,7 +34,7 @@ namespace AzureMagic.Storage.TableStorage.Specifications.Features.RestApi
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Tables", @"
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "TablesRestApi", @"
 Operations on Tables
 
 The REST API provides operations to enumerate the tables in a storage account, create a new table, delete an existing table, and get or set stored access policies for a table.
@@ -72,11 +72,11 @@ The REST API provides operations to enumerate the tables in a storage account, c
         {
 #line 9
 #line 10
- testRunner.Given("Tables has been initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("TablesRestApi has been initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
         
-        public virtual void SetFixture(TablesFeature.FixtureData fixtureData)
+        public virtual void SetFixture(TablesRestApiFeature.FixtureData fixtureData)
         {
         }
         
@@ -86,7 +86,7 @@ The REST API provides operations to enumerate the tables in a storage account, c
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Tables")]
+        [Xunit.TraitAttribute("FeatureTitle", "TablesRestApi")]
         [Xunit.TraitAttribute("Description", "Query Tables")]
         public virtual void QueryTables()
         {
@@ -98,134 +98,117 @@ this.FeatureBackground();
 #line 13
  testRunner.When("ListAsync() is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 14
- testRunner.Then("a list of tables for the current connection is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("a successful HttpResponseMessage is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 15
+ testRunner.And("the HttpResponseMessage.Content is a JSON list of tables for the current connecti" +
+                    "on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Tables")]
+        [Xunit.TraitAttribute("FeatureTitle", "TablesRestApi")]
         [Xunit.TraitAttribute("Description", "Create Table")]
         public virtual void CreateTable()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create Table", ((string[])(null)));
-#line 16
+#line 17
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
-#line 17
+#line 18
  testRunner.Given("todo: write scenario", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Tables")]
+        [Xunit.TraitAttribute("FeatureTitle", "TablesRestApi")]
         [Xunit.TraitAttribute("Description", "Delete Table")]
         public virtual void DeleteTable()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete Table", ((string[])(null)));
-#line 19
+#line 20
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
-#line 20
+#line 21
  testRunner.Given("todo: write scenario", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Xunit.FactAttribute(Skip="Ignored")]
-        [Xunit.TraitAttribute("FeatureTitle", "Tables")]
+        [Xunit.TraitAttribute("FeatureTitle", "TablesRestApi")]
         [Xunit.TraitAttribute("Description", "Get Table ACL")]
         public virtual void GetTableACL()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Table ACL", new string[] {
                         "ignore",
                         "todo"});
-#line 23
+#line 24
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
-#line 24
+#line 25
  testRunner.Given("todo: write scenario", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Xunit.FactAttribute(Skip="Ignored")]
-        [Xunit.TraitAttribute("FeatureTitle", "Tables")]
+        [Xunit.TraitAttribute("FeatureTitle", "TablesRestApi")]
         [Xunit.TraitAttribute("Description", "Set Table ACL")]
         public virtual void SetTableACL()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Set Table ACL", new string[] {
                         "ignore",
                         "todo"});
-#line 27
+#line 28
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
-#line 28
+#line 29
  testRunner.Given("todo: write scenario", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Tables")]
-        [Xunit.TraitAttribute("Description", "Constructor(connectionString: null)")]
-        public virtual void ConstructorConnectionStringNull()
+        [Xunit.TraitAttribute("FeatureTitle", "TablesRestApi")]
+        [Xunit.TraitAttribute("Description", "Constructor(account: null)")]
+        public virtual void ConstructorAccountNull()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor(connectionString: null)", ((string[])(null)));
-#line 30
-this.ScenarioSetup(scenarioInfo);
-#line 9
-this.FeatureBackground();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor(account: null)", ((string[])(null)));
 #line 31
- testRunner.Given("connectionString is null", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
+#line 9
+this.FeatureBackground();
 #line 32
- testRunner.When("Tables(connectionString) is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("storageAccount is null", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 33
- testRunner.Then("ArgumentNullException is thrown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("Tables(account) is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 34
+ testRunner.Then("ArgumentNullException is thrown for account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Tables")]
-        [Xunit.TraitAttribute("Description", "Constructor(connectionString: empty)")]
-        public virtual void ConstructorConnectionStringEmpty()
+        [Xunit.TraitAttribute("FeatureTitle", "TablesRestApi")]
+        [Xunit.TraitAttribute("Description", "Constructor(account: is not null)")]
+        public virtual void ConstructorAccountIsNotNull()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor(connectionString: empty)", ((string[])(null)));
-#line 35
-this.ScenarioSetup(scenarioInfo);
-#line 9
-this.FeatureBackground();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor(account: is not null)", ((string[])(null)));
 #line 36
- testRunner.Given("connectionString is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 37
- testRunner.When("Tables(connectionString) is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 38
- testRunner.Then("ArgumentException is thrown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Tables")]
-        [Xunit.TraitAttribute("Description", "Constructor(connectionString: valid)")]
-        public virtual void ConstructorConnectionStringValid()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor(connectionString: valid)", ((string[])(null)));
-#line 40
 this.ScenarioSetup(scenarioInfo);
 #line 9
 this.FeatureBackground();
-#line 41
- testRunner.Given("connectionString is valid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 42
- testRunner.When("Tables(connectionString) is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 43
+#line 37
+ testRunner.Given("storageAccount is not null", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 38
+ testRunner.When("Tables(account) is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 39
  testRunner.Then("an instance is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -238,12 +221,12 @@ this.FeatureBackground();
             
             public FixtureData()
             {
-                TablesFeature.FeatureSetup();
+                TablesRestApiFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                TablesFeature.FeatureTearDown();
+                TablesRestApiFeature.FeatureTearDown();
             }
         }
     }

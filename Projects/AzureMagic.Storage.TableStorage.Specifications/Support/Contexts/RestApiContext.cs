@@ -1,4 +1,6 @@
-﻿namespace AzureMagic.Storage.TableStorage.Specifications.Support.Contexts
+﻿using AzureMagic.Storage.TableStorage.Helpers;
+
+namespace AzureMagic.Storage.TableStorage.Specifications.Support.Contexts
 {
     public class RestApiContext
     {
@@ -10,9 +12,7 @@
             // Future version may allow connection to Azure account.
             ConnectionString = "UseDevelopmentStorage=true;";
             
-            UsingDevelopmentStorage = (ConnectionString == "UseDevelopmentStorage=true;");
-
-            if (UsingDevelopmentStorage)
+            if (ConnectionString.IsDevelopmentStorage())
             {
                 WindowAzureStorageEmulatorManager.StartEmulator();
             }

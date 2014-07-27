@@ -15,16 +15,18 @@ namespace AzureMagic.Storage.TableStorage.Specifications.Support.Steps
             Context = context;
         }
 
-        [Then(@"ArgumentNullException is thrown")]
-        public void ThenArgumentNullExceptionIsThrown()
+        [Then(@"ArgumentNullException is thrown for (.*)")]
+        public void ThenArgumentNullExceptionIsThrownFor(string paramName)
         {
-            Context.Exception.Should().BeOfType<ArgumentNullException>();
+            Context.ArgumentNullException.Should().NotBeNull();
+            Context.ArgumentNullException.ParamName.Should().Be(paramName);
         }
 
-        [Then(@"ArgumentException is thrown")]
-        public void ThenArgumentExceptionIsThrown()
+        [Then(@"ArgumentException is thrown for (.*)")]
+        public void ThenArgumentExceptionIsThrownFor(string paramName)
         {
-            Context.Exception.Should().BeOfType<ArgumentException>();
+            Context.ArgumentException.Should().NotBeNull();
+            Context.ArgumentException.ParamName.Should().Be(paramName);
         }
     }
 }
