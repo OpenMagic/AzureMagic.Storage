@@ -2,6 +2,7 @@
 
 namespace AzureMagic.Storage.TableStorage
 {
+    // todo: docs
     public class StorageAccount
     {
         public StorageAccount(string accountName, string accountKey)
