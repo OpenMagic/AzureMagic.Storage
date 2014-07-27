@@ -14,11 +14,16 @@ namespace AzureMagic.Storage.TableStorage
             Name = accountName;
             Key = accountKey;
             TablesUri = tablesUri;
+
+            ConnectionString = accountName =="devstoreaccount1" 
+                ? "UseDevelopmentStorage=true;" 
+                : string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1};", accountName, accountKey);
         }
 
         public string Name { get; private set; }
         public string Key { get; private set; }
         public Uri TablesUri { get; private set; }
+        public string ConnectionString { get; private set; }
 
         public static Uri CreateTablesUri(string accountName)
         {

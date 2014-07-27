@@ -14,12 +14,6 @@ namespace AzureMagic.Storage.TableStorage.RestApi
     {
         private readonly StorageAccount Account;
 
-        private enum AuthorizationScheme
-        {
-            SharedKeyLite,
-            SharedKey
-        };
-
         public TablesRestApi(StorageAccount account)
         {
             Account = account;
@@ -31,35 +25,63 @@ namespace AzureMagic.Storage.TableStorage.RestApi
 
             using (var client = new HttpClient())
             {
-
-                var request = new HttpRequestMessage(HttpMethod.Get, new Uri(Account.TablesUri, "Tables"));
+                var request = new HttpRequestMessage(HttpMethod.Get, CombineUri(Account.TablesUri, "Tables"));
                 var headers = request.Headers;
 
                 headers.Accept.Clear();
                 headers.Accept.ParseAdd("application/json;odata=fullmetadata");
 
-                headers.Date = DateTime.Now;
+                headers.Add("x-ms-date", now);
 
                 // http://msdn.microsoft.com/en-us/library/azure/dd179405.aspx implies this value is optional.
                 // However when accept header is application/json then x-ms-version header is required.
                 headers.Add("x-ms-version", "2013-08-15");
 
-                headers.Add("Authorization", GetAuthorizationHeader(request, Account.Name, Account.Key));
+                const AuthorizationScheme authorizationScheme = AuthorizationScheme.SharedKey;
+
+                var signature = GetSignature(request, Account.Name, Account.Key, authorizationScheme);
+                var credentials = string.Format(CultureInfo.InvariantCulture, "{0}:{1}", Account.Name, signature);
+
+                headers.Authorization = new AuthenticationHeaderValue(authorizationScheme.ToString(), credentials);
 
                 return await client.SendAsync(request);
             }
         }
 
-        private static string GetAuthorizationHeader(HttpRequestMessage request, string account, string storageKey, AuthorizationScheme authorizationScheme = AuthorizationScheme.SharedKey)
+        private static Uri CombineUri(Uri uri, string relativeUri)
+        {
+            var path = uri.PathAndQuery;
+
+            if (path.Contains("?"))
+            {
+                throw new NotImplementedException("Cannot handle ?");
+            }
+
+            if (path != "/")
+            {
+                relativeUri = path + "/" + relativeUri;
+            }
+
+            return new Uri(uri, relativeUri);
+        }
+
+        private static string GetSignature(HttpRequestMessage request, string account, string storageKey, AuthorizationScheme authorizationScheme = AuthorizationScheme.SharedKey)
         {
             var sharedKey = Convert.FromBase64String(storageKey);
             var resource = GetResource(request);
             var stringToSign = GetStringToSign(request, account, authorizationScheme, resource);
-            var hasher = new HMACSHA256(sharedKey);
-            var signedSignature = Convert.ToBase64String(hasher.ComputeHash(Encoding.UTF8.GetBytes(stringToSign)));
-            var authorizationHeader = string.Format("{0} {1}:{2}", authorizationScheme, account, signedSignature);
+            var signedSignature = SignSignature(sharedKey, stringToSign);
 
-            return authorizationHeader;
+            return signedSignature;
+        }
+
+        private static string SignSignature(byte[] key, string message)
+        {
+            using (HashAlgorithm hashAlgorithm = new HMACSHA256(key))
+            {
+                var messageBuffer = Encoding.UTF8.GetBytes(message);
+                return Convert.ToBase64String(hashAlgorithm.ComputeHash(messageBuffer));
+            }
         }
 
         private static string GetResource(HttpRequestMessage request)
@@ -89,13 +111,12 @@ namespace AzureMagic.Storage.TableStorage.RestApi
                         request.Method,
                         TryGetHeaderValue(headers, "Content-MD5", ""),
                         TryGetHeaderValue(headers, "Content-Type", ""),
-                        headers.Date.GetValueOrDefault().ToString("R"),
+                        TryGetHeaderValue(headers, "x-ms-date", ""),
                         account,
                         resource);
 
                 default:
                     throw new NotImplementedException(string.Format("KeyType.{0} has not been implemented.", authorizationScheme));
-
             }
         }
 
@@ -107,5 +128,11 @@ namespace AzureMagic.Storage.TableStorage.RestApi
 
             return value;
         }
+
+        private enum AuthorizationScheme
+        {
+            SharedKeyLite,
+            SharedKey
+        };
     }
 }

@@ -9,7 +9,7 @@ using AzureMagic.Storage.TableStorage.Specifications.Support.Contexts;
 using Common.Logging;
 using FluentAssertions;
 using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Auth;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TechTalk.SpecFlow;
 
@@ -74,20 +74,26 @@ namespace AzureMagic.Storage.TableStorage.Specifications.Features.RestApi.Steps
 
         private IEnumerable<string> GetActualTableNames()
         {
-            var json = Response.Content.ReadAsAsync<JObject>().Result;
-            var value = (JArray) json["value"];
-            var tableNames = value.Select(jtoken => jtoken["TableName"].Value<string>());
+            var content = Response.Content.ReadAsStringAsync().Result;
 
-            return tableNames;
+            var json = JsonConvert.DeserializeObject<JObject>(content);
+            var value = (JArray) json["value"];
+
+            return value.Select(v => v["TableName"].Value<string>()).ToList();
         }
 
         private IEnumerable<string> GetExpectedTableNames()
         {
-            var storageAccount = new CloudStorageAccount(new StorageCredentials(StorageAccount.Name, StorageAccount.Key), true);
+            var storageAccount = CloudStorageAccount.Parse(StorageAccount.ConnectionString);
             var tableClient = storageAccount.CreateCloudTableClient();
             var tables = tableClient.ListTables();
 
             return tables.Select(t => t.Name);
+        }
+
+        private object GetStorageAccount()
+        {
+            throw new NotImplementedException();
         }
 
         [Given(@"storageAccount is (.*)")]

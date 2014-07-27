@@ -77,14 +77,15 @@
     </Compile>
     <Compile Include="Helpers\HttpResponseMessageExtensions.cs" />
     <Compile Include="Helpers\Yaml\YamlConverter.cs" />
-    <Compile Include="RestApi\RestApiHelpers.cs" />
     <Compile Include="StorageAccount.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestApi\TablesRestApi.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FodyWeavers.xml" />
+    <Content Include="FodyWeavers.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
